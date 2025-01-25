@@ -4,7 +4,5 @@ numpy==1.26.4
 scipy==1.15.1
 google-cloud-speech==2.30.0
 google-cloud-texttospeech==2.24.0
-pyaudio==0.2.14
 google-generativeai==0.8.3
-pydub==0.25.1
 google-cloud-dialogflow-cx==1.38.0
