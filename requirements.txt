@@ -7,4 +7,3 @@ google-cloud-texttospeech==2.24.0
 google-generativeai==0.8.3
 google-cloud-dialogflow-cx==1.38.0
 audio_recorder_streamlit
-pandas
