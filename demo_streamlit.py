@@ -107,34 +107,26 @@ stt_client = speech.SpeechClient()
 tts_client = texttospeech.TextToSpeechClient()
 
 def convert_to_mono(audio_data):
-    # Read the audio from the WAV data
     sample_rate, audio_array = wavfile.read(io.BytesIO(audio_data))
-    
-    # Check if the audio is stereo (2 channels)
-    if audio_array.ndim == 2:
-        # Convert stereo to mono by averaging the two channels
-        mono_audio = np.mean(audio_array, axis=1).astype(np.int16)
-    else:
-        # If already mono, return as is
-        mono_audio = audio_array
-
-    # Write the mono audio to a bytes buffer
-    with io.BytesIO() as mono_wav:
-        wavfile.write(mono_wav, sample_rate, mono_audio)
-        mono_wav.seek(0)
-        return mono_wav.read()
-
+    if audio_array.ndim == 2:  # Stereo to mono
+        audio_array = np.mean(audio_array, axis=1).astype(np.int16)
+    if sample_rate > 16000:  # Limit sample rate to 16 kHz
+        audio_array = audio_array[::int(sample_rate / 16000)]
+        sample_rate = 16000
+    with io.BytesIO() as buffer:
+        wavfile.write(buffer, sample_rate, audio_array)
+        buffer.seek(0)
+        return buffer.read()
 
 # Function to transcribe audio using Google STT
 def transcribe_audio(audio_data):
     st.info("Transcribing audio...")
-    sample_rate = get_sample_rate(audio_data)
     audio_content = audio_data
     mono_audio_data = convert_to_mono(audio_data)
     audio = speech.RecognitionAudio(content=mono_audio_data)
     config = speech.RecognitionConfig(
         encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
-        sample_rate_hertz=sample_rate,
+        sample_rate_hertz=16000,
         language_code="en-US",
     )
     response = stt_client.recognize(config=config, audio=audio)
