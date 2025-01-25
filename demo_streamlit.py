@@ -25,7 +25,7 @@ location_id = "global"  # Your agent's location, e.g., "global"
 agent_id = "ab039e5f-d9ce-4feb-90ad-4184f23f01e5"  # Your Dialogflow CX agent ID
 flow_id = "dd90ab06-761a-410d-bb04-f60368c323ac"
 agent = f"projects/{project_id}/locations/{location_id}/agents/{agent_id}"
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials_skilzen.json"
+GOOGLE_APPLICATION_CREDENTIALS = fb_credentials = st.secrets["firebase"]['my_project_settings']
 import io
 import wave
 
