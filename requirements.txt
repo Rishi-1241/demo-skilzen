@@ -1,0 +1,13 @@
+asyncio
+google-cloud-dialogflowcx
+google-cloud-speech
+google-cloud-texttospeech
+google-generativeai
+numpy
+pyaudio
+pydub
+scipy
+sounddevice
+streamlit
+tempfile
+uuid
