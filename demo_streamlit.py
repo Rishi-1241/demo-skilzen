@@ -4,18 +4,14 @@ from scipy.io.wavfile import write
 import tempfile
 from google.cloud import speech, texttospeech
 import io
-import pyaudio
 import google.generativeai as genai
 from google.cloud import speech
 from google.cloud import texttospeech
 import os
-from pydub import AudioSegment
 import numpy as np
 from scipy.io import wavfile
-from pydub.playback import play
 import time
 import asyncio
-from concurrent.futures import ThreadPoolExecutor
 import time
 from google.cloud import speech, texttospeech
 import uuid
